@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="rtc-side-tab-body">
-            <div class="rtc-side-tab-body-container" ref="tab_body_ctn" :style="'transform:translateX('+ translateX + ')'">
+            <div class="rtc-side-tab-body-container" ref="tab_body_ctn" :style="style">
                 <div class="rtc-side-tab-body-page" v-for="(v,i) in headers" :key="i" :class="{active:selectedIndex == i}">
                     <slot :name="i"></slot>
                 </div>
@@ -33,8 +33,8 @@ export default {
         event:eventName
     },
     computed:{
-        translateX(){
-            return - 100*this.selectedIndex + '%';
+        style(){
+            return `transform:translateX(${-100*this.selectedIndex}%)`;
         }
     },
     methods:{
