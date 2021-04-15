@@ -40,6 +40,7 @@ export class ChatService {
         this._client = TIM.create({
             SDKAppID:sdkAppId
         });
+        // this._client.setLogLevel(4);
         this._client.registerPlugin({'tim-upload-plugin': TIMUploadPlugin});
         this._client.on(TIM.EVENT.MESSAGE_RECEIVED, evt=>onMessageReceived(evt));
         const readyPromise = new Promise(resolve => {
