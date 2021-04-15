@@ -19,6 +19,9 @@ const propName = 'message';
 const eventName = 'message-changed';
 
 const sendMessageEvent="send-message";
+
+import { UIUtil } from '../../util/ui';
+
 export default {
     props:{
         placeholder:{
@@ -44,17 +47,12 @@ export default {
             }
         }
     },
-    data(){
-        return {
-            overflowCount:0
-        }
-    },
     methods:{
         onInput(e){
-            const breaks= e.currentTarget.value.match(/\n/g);
-            if(breaks && breaks.length < 3){
-                e.currentTarget.style.height = e.currentTarget.scrollHeight + 2 + 'px';
-            }
+            const target = e.currentTarget;
+            const { height, overflowY } = UIUtil.ComputeAutoHeight(target,1,3);
+            target.style.height = height;
+            target.style.overflowY = overflowY;
         },
         onSendMessage(){
             this.value && this.$emit(sendMessageEvent, this.value);
